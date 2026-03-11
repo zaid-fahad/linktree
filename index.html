@@ -130,9 +130,16 @@
         /* Horizontal Slider Customization */
         .slider-container::-webkit-scrollbar { display: none; }
         .slider-container { -ms-overflow-style: none; scrollbar-width: none; }
+        
         .project-card {
-            flex: 0 0 38%; /* Precision calculation for 2.5 visibility */
+            flex: 0 0 38%; /* 2.5 visible on mobile */
             scroll-snap-align: start;
+        }
+
+        @media (min-width: 768px) {
+            .project-card {
+                flex: 0 0 22%; /* 4.5 visible on desktop */
+            }
         }
 
         .label-tech {
@@ -153,24 +160,22 @@
             pointer-events: none;
         }
 
-        /* Staggered Delays */
+        /* Modal specific */
+        #projectModal { transition: opacity 0.3s ease, visibility 0.3s ease; }
+        #modalContent { transform: translateY(20px); transition: transform 0.3s ease; }
+        .modal-open #modalContent { transform: translateY(0); }
+
+        /* Custom Hover Delays for Staggered Load */
         .delay-100 { animation-delay: 0.1s; }
         .delay-200 { animation-delay: 0.2s; }
         .delay-300 { animation-delay: 0.3s; }
         .delay-400 { animation-delay: 0.4s; }
         .delay-500 { animation-delay: 0.5s; }
-        .delay-550 { animation-delay: 0.55s; }
         .delay-600 { animation-delay: 0.6s; }
-        .delay-650 { animation-delay: 0.65s; }
         .delay-700 { animation-delay: 0.7s; }
-
-        /* Modal specific */
-        #projectModal { transition: opacity 0.3s ease, visibility 0.3s ease; }
-        #modalContent { transform: translateY(20px); transition: transform 0.3s ease; }
-        .modal-open #modalContent { transform: translateY(0); }
     </style>
 </head>
-<body class="dark py-12 flex flex-col items-center">
+<body class="dark py-8 md:py-24 flex flex-col items-center">
 
     <div class="grid-mesh"></div>
 
@@ -179,165 +184,181 @@
         <i id="themeIcon" class="fa-solid fa-moon text-xl text-black dark:text-neo-yellow"></i>
     </button>
 
-    <main class="max-w-md w-full mx-auto relative px-6">
-        <!-- Profile Section -->
-        <header class="text-center mb-10">
-            <div class="relative inline-block mb-8 animate-profile">
-                <div class="w-32 h-32 rounded-[2.5rem] overflow-hidden glass-panel p-1.5 rotate-2">
-                    <img src="https://zaidfahad.com/img/logo.jpg" 
-                         alt="Mohammad Zaid Iqbal Fahad" 
-                         class="w-full h-full rounded-[2.2rem] object-cover border-2 border-black dark:border-white">
+    <!-- Main Container -->
+    <main class="w-full max-w-md md:max-w-4xl mx-auto relative px-6 md:px-0">
+        
+        <!-- Header Section -->
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12 mb-16">
+            <!-- Profile Section -->
+            <header class="text-center md:text-left flex-shrink-0">
+                <div class="relative inline-block mb-8 animate-profile">
+                    <div class="w-32 md:w-48 h-32 md:h-48 rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden glass-panel p-1.5 rotate-2">
+                        <img src="https://zaidfahad.com/img/logo.jpg" 
+                             alt="Mohammad Zaid Iqbal Fahad" 
+                             class="w-full h-full rounded-[2.2rem] md:rounded-[3.2rem] object-cover border-2 border-black dark:border-white">
+                    </div>
+                    <div class="absolute -bottom-2 -right-2 md:bottom-2 md:-right-6 bg-neo-yellow border-2 border-black px-4 py-1 text-[10px] font-black text-black -rotate-6 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_#ffffff]">
+                        <span class="inline-block w-2 h-2 rounded-full bg-black animate-pulse mr-1.5"></span> ONLINE
+                    </div>
                 </div>
-                <div class="absolute -bottom-2 -right-4 bg-neo-yellow border-2 border-black px-4 py-1 text-[10px] font-black text-black -rotate-6 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_#ffffff]">
-                    <span class="inline-block w-2 h-2 rounded-full bg-black animate-pulse mr-1.5"></span> ONLINE
-                </div>
-            </div>
-            
-            <h1 class="text-4xl font-extrabold tracking-tighter mb-3 text-black dark:text-white transition-colors animate-entrance delay-100 uppercase">
-                Zaid Fahad
-            </h1>
-            <p class="text-xs font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest animate-entrance delay-200">
-                IT Professional | Tech Enthusiast | Hobbiest Photographer
-            </p>
-        </header>
+            </header>
 
-        <!-- Bio Card -->
-        <section class="mb-8 animate-entrance delay-300">
-            <div class="glass-panel p-6 rounded-3xl text-black dark:text-zinc-200">
-                <p class="leading-relaxed font-medium text-sm md:text-base">
-                    Just another IT professional with a tick for Photography. Love to tinker with tech & cook mind fulfilling meals. Always eager to learn new things & excited to share my knowledge with others. 
-                </p>
+            <!-- Bio and Title -->
+            <div class="flex-grow space-y-6">
+                <div class="animate-entrance delay-100">
+                    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 text-black dark:text-white transition-colors uppercase text-center md:text-left">
+                        Zaid Fahad
+                    </h1>
+                    <p class="text-xs md:text-sm font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest text-center md:text-left">
+                        IT Professional | Tech Enthusiast | Hobbiest Photographer
+                    </p>
+                </div>
+
+                <div class="glass-panel p-6 md:p-8 rounded-[2rem] md:rounded-[3rem] text-black dark:text-zinc-200 animate-entrance delay-200">
+                    <p class="leading-relaxed font-medium text-sm md:text-lg">
+                        Just another IT professional with a tick for Photography. Love to tinker with tech & cook mind fulfilling meals. Always eager to learn new things & excited to share my knowledge with others. 
+                    </p>
+                </div>
             </div>
-        </section>
+        </div>
 
         <!-- Social Grid -->
-        <nav class="grid grid-cols-2 gap-3 mb-10" aria-label="Social media links">
-            <a href="https://www.linkedin.com/in/zaidfahad" target="_blank" class="glass-btn rounded-2xl p-4 flex items-center justify-center gap-3 bg-neo-blue text-black group animate-entrance delay-400">
-                <i class="fa-brands fa-linkedin text-xl"></i> 
-                <span class="text-[11px] font-black uppercase">LinkedIn</span>
+        <nav class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12" aria-label="Social media links">
+            <a href="https://www.linkedin.com/in/zaidfahad" target="_blank" class="glass-btn rounded-2xl p-4 md:p-6 flex items-center justify-center gap-3 bg-neo-blue text-black group animate-entrance delay-300">
+                <i class="fa-brands fa-linkedin text-xl md:text-2xl"></i> 
+                <span class="text-[11px] md:text-xs font-black uppercase">LinkedIn</span>
             </a>
-            <a href="https://wa.me/8801627939394" target="_blank" class="glass-btn rounded-2xl p-4 flex items-center justify-center gap-3 bg-neo-mint text-black group animate-entrance delay-400">
-                <i class="fa-brands fa-whatsapp text-xl"></i>
-                <span class="text-[11px] font-black uppercase">WhatsApp</span>
+            <a href="https://wa.me/8801627939394" target="_blank" class="glass-btn rounded-2xl p-4 md:p-6 flex items-center justify-center gap-3 bg-neo-mint text-black group animate-entrance delay-300">
+                <i class="fa-brands fa-whatsapp text-xl md:text-2xl"></i>
+                <span class="text-[11px] md:text-xs font-black uppercase">WhatsApp</span>
             </a>
-            <a href="https://facebook.com/zaidfahad23" target="_blank" class="glass-btn rounded-2xl p-4 flex items-center justify-center gap-3 bg-neo-facebook text-black group animate-entrance delay-500">
-                <i class="fa-brands fa-facebook text-xl"></i>
-                <span class="text-[11px] font-black uppercase">Facebook</span>
+            <a href="https://facebook.com/zaidfahad23" target="_blank" class="glass-btn rounded-2xl p-4 md:p-6 flex items-center justify-center gap-3 bg-neo-facebook text-black group animate-entrance delay-400">
+                <i class="fa-brands fa-facebook text-xl md:text-2xl"></i>
+                <span class="text-[11px] md:text-xs font-black uppercase">Facebook</span>
             </a>
-            <a href="https://instagram.com/zaidfahad23" target="_blank" class="glass-btn rounded-2xl p-4 flex items-center justify-center gap-3 bg-neo-pink text-black group animate-entrance delay-500">
-                <i class="fa-brands fa-instagram text-xl"></i>
-                <span class="text-[11px] font-black uppercase">Instagram</span>
+            <a href="https://instagram.com/zaidfahad23" target="_blank" class="glass-btn rounded-2xl p-4 md:p-6 flex items-center justify-center gap-3 bg-neo-pink text-black group animate-entrance delay-400">
+                <i class="fa-brands fa-instagram text-xl md:text-2xl"></i>
+                <span class="text-[11px] md:text-xs font-black uppercase">Instagram</span>
             </a>
         </nav>
 
-        <!-- Featured Resume -->
-        <div class="mb-10 animate-entrance delay-550">
-            <a href="/img/resume.pdf" class="group block glass-btn rounded-[2.5rem] p-6 bg-white dark:bg-white/10 text-black dark:text-white border-2 border-black dark:border-white">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-5">
-                        <div class="w-14 h-14 rounded-2xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black shadow-[4px_4px_0px_0px_#818cf8]">
-                             <i class="fa-solid fa-file-pdf text-2xl"></i>
+        <!-- Main Content Area (2 column layout for desktop) -->
+        <div class="flex flex-col md:flex-row gap-12">
+            
+            <!-- Left Column: Resume & Directory -->
+            <div class="w-full md:w-1/2 space-y-12">
+                <!-- Featured Resume -->
+                <div class="animate-entrance delay-500">
+                    <a href="/img/resume.pdf" class="group block glass-btn rounded-[2.5rem] p-6 bg-white dark:bg-white/10 text-black dark:text-white border-2 border-black dark:border-white">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-5">
+                                <div class="w-14 h-14 rounded-2xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black shadow-[4px_4px_0px_0px_#818cf8]">
+                                     <i class="fa-solid fa-file-pdf text-2xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-extrabold text-xl leading-none mb-1 uppercase">View Resume</p>
+                                    <p class="text-[10px] uppercase font-bold text-zinc-500 dark:text-zinc-400">Skills & Experience</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right opacity-30 group-hover:translate-x-2 transition-transform"></i>
                         </div>
-                        <div>
-                            <p class="font-extrabold text-xl leading-none mb-1 uppercase">View Resume</p>
-                            <p class="text-[10px] uppercase font-bold text-zinc-500 dark:text-zinc-400">Skills & Experience</p>
+                    </a>
+                </div>
+
+                <!-- Technical Directory -->
+                <section class="space-y-4 animate-entrance delay-600">
+                    <div class="flex items-center gap-4 px-1">
+                        <span class="label-tech text-black dark:text-white opacity-60 uppercase">Technical Directory</span>
+                        <div class="h-px flex-grow bg-black dark:bg-white/20"></div>
+                    </div>
+                    
+                    <a href="https://portfolio.zaidfahad.com" target="_blank" class="group block glass-btn rounded-[2rem] p-5 bg-white/40 dark:bg-transparent text-black dark:text-white">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black">
+                                     <i class="fa-solid fa-briefcase"></i>
+                                </div>
+                                <span class="font-bold text-base">Portfolio</span>
+                            </div>
+                            <span class="px-2 py-1 rounded-full border border-rose-500/30 text-rose-500 text-[9px] font-black uppercase">Offline</span>
+                        </div>
+                    </a>
+
+                    <a href="https://photography.zaidfahad.com" target="_blank" class="group block glass-btn rounded-[2rem] p-5 bg-white/40 dark:bg-transparent text-black dark:text-white">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black">
+                                    <i class="fa-solid fa-camera"></i>
+                                </div>
+                                <span class="font-bold text-base">Photography</span>
+                            </div>
+                            <span class="status-pill border-amber-500/30 text-amber-500 rounded-full text-[9px] px-2">BUILD</span>
+                        </div>
+                    </a>
+                </section>
+            </div>
+
+            <!-- Right Column: Awards -->
+            <div class="w-full md:w-1/2">
+                <section class="space-y-6 animate-entrance delay-650">
+                    <div class="flex items-center gap-4 px-1">
+                        <span class="label-tech text-black dark:text-white opacity-60 uppercase tracking-widest">Awards & Recognition</span>
+                        <div class="h-px flex-grow bg-black dark:bg-white/20"></div>
+                    </div>
+                    
+                    <div class="glass-panel p-5 rounded-[2rem] bg-white/20 dark:bg-white/5">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 bg-neo-yellow rounded-2xl flex items-center justify-center text-black shadow-[2px_2px_0px_0px_#000]">
+                                <i class="fa-solid fa-award text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-sm uppercase leading-tight dark:text-white">Top Position: ITEE (IP) 2019</h3>
+                                <p class="text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 uppercase font-bold tracking-tighter">ITPEC, Japan & BCC, Bangladesh</p>
+                            </div>
                         </div>
                     </div>
-                    <i class="fa-solid fa-chevron-right opacity-30"></i>
-                </div>
-            </a>
+
+                    <div class="glass-panel p-5 rounded-[2rem] bg-white/20 dark:bg-white/5">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 bg-neo-blue rounded-2xl flex items-center justify-center text-black shadow-[2px_2px_0px_0px_#000]">
+                                <i class="fa-solid fa-medal text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-sm uppercase leading-tight dark:text-white">1st Runner up: CARD 2025</h3>
+                                <p class="text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 uppercase font-bold tracking-tighter">IUB NEST | Independent University Bangladesh</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-5 rounded-[2rem] bg-white/20 dark:bg-white/5">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 bg-neo-mint rounded-2xl flex items-center justify-center text-black shadow-[2px_2px_0px_0px_#000]">
+                                <i class="fa-solid fa-trophy text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-sm uppercase leading-tight dark:text-white">1st runner up: Programming Week</h3>
+                                <p class="text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 uppercase font-bold tracking-tighter">IUB NEST | Programming Week 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
 
-        <!-- Project Slider -->
-        <section class="mb-10 animate-entrance delay-600">
-            <div class="flex items-center gap-4 px-1 mb-4">
+        <!-- Project Slider (Full Width) -->
+        <section class="mt-16 mb-10 animate-entrance delay-700">
+            <div class="flex items-center gap-4 px-1 mb-6">
                 <span class="label-tech text-black dark:text-white opacity-60 uppercase">Selected Projects</span>
                 <div class="h-px flex-grow bg-black dark:bg-white/20"></div>
             </div>
             
-            <div class="slider-container flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 px-1">
-                <div id="project-slider-mount" class="flex gap-4"></div>
+            <div class="slider-container flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 px-1">
+                <div id="project-slider-mount" class="flex gap-4 md:gap-6"></div>
             </div>
-        </section>
-
-        <!-- Awards Section -->
-        <section class="mb-10 space-y-6 animate-entrance delay-650">
-            <div class="flex items-center gap-4 px-1">
-                <span class="label-tech text-black dark:text-white opacity-60 uppercase tracking-widest">Awards & Recognition</span>
-                <div class="h-px flex-grow bg-black dark:bg-white/20"></div>
-            </div>
-            
-            <div class="glass-panel p-5 rounded-[2rem] bg-white/20 dark:bg-white/5 animate-entrance delay-700">
-                <div class="flex gap-4">
-                    <div class="flex-shrink-0 w-12 h-12 bg-neo-yellow rounded-2xl flex items-center justify-center text-black shadow-[2px_2px_0px_0px_#000]">
-                        <i class="fa-solid fa-award text-2xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-extrabold text-sm uppercase leading-tight dark:text-white">Top Position: ITEE (IP) 2019</h3>
-                        <p class="text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 uppercase font-bold tracking-tighter">ITPEC, Japan & BCC, Bangladesh</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="glass-panel p-5 rounded-[2rem] bg-white/20 dark:bg-white/5 animate-entrance delay-700">
-                <div class="flex gap-4">
-                    <div class="flex-shrink-0 w-12 h-12 bg-neo-blue rounded-2xl flex items-center justify-center text-black shadow-[2px_2px_0px_0px_#000]">
-                        <i class="fa-solid fa-medal text-2xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-extrabold text-sm uppercase leading-tight dark:text-white">1st Runner up: CARD 2025</h3>
-                        <p class="text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 uppercase font-bold tracking-tighter">IUB NEST | Independent University Bangladesh</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="glass-panel p-5 rounded-[2rem] bg-white/20 dark:bg-white/5 animate-entrance delay-700">
-                <div class="flex gap-4">
-                    <div class="flex-shrink-0 w-12 h-12 bg-neo-mint rounded-2xl flex items-center justify-center text-black shadow-[2px_2px_0px_0px_#000]">
-                        <i class="fa-solid fa-trophy text-2xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-extrabold text-sm uppercase leading-tight dark:text-white">1st runner up: Programming Week</h3>
-                        <p class="text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 uppercase font-bold tracking-tighter">IUB NEST | Programming Week 2025</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Technical Directory -->
-        <section class="space-y-4 animate-entrance delay-700">
-            <div class="flex items-center gap-4 px-1">
-                <span class="label-tech text-black dark:text-white opacity-60 uppercase">Technical Directory</span>
-                <div class="h-px flex-grow bg-black dark:bg-white/20"></div>
-            </div>
-            
-            <a href="https://portfolio.zaidfahad.com" target="_blank" class="group block glass-btn rounded-[2rem] p-5 bg-white/40 dark:bg-transparent text-black dark:text-white">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black">
-                             <i class="fa-solid fa-briefcase group-hover:rotate-12 transition-transform"></i>
-                        </div>
-                        <span class="font-bold text-base">Portfolio</span>
-                    </div>
-                    <span class="px-2 py-1 rounded-full border border-rose-500/30 text-rose-500 text-[9px] font-black uppercase">Offline</span>
-                </div>
-            </a>
-
-            <a href="https://photography.zaidfahad.com" target="_blank" class="group block glass-btn rounded-[2rem] p-5 bg-white/40 dark:bg-transparent text-black dark:text-white">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black">
-                            <i class="fa-solid fa-camera group-hover:rotate-12 transition-transform"></i>
-                        </div>
-                        <span class="font-bold text-base">Photography</span>
-                    </div>
-                    <span class="px-2 py-1 rounded-full border border-amber-500/30 text-amber-500 text-[9px] font-black uppercase">Build</span>
-                </div>
-            </a>
         </section>
 
         <!-- Footer -->
-        <footer class="mt-20 text-center pb-12 opacity-80 animate-entrance delay-700">
+        <footer class="mt-20 text-center pb-24 opacity-80 animate-entrance delay-700">
             <p class="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 mb-8 uppercase tracking-[0.2em]">
                 Mohammad Zaid Iqbal Fahad &copy; 2024
             </p>
@@ -348,12 +369,13 @@
                 </div>
                 Running on Cloudflare Pages
             </div>
+            <p class="mt-6 text-[10px] text-zinc-400 uppercase tracking-widest">Can't afford hosting right now</p>
         </footer>
     </main>
 
     <!-- Fullscreen Modal -->
     <div id="projectModal" class="fixed inset-0 z-[100] invisible opacity-0 bg-brand-navy/95 backdrop-blur-xl flex items-center justify-center p-6 overflow-y-auto">
-        <div id="modalContent" class="glass-panel w-full max-w-lg rounded-[2.5rem] bg-brand-navy/50 p-8 relative">
+        <div id="modalContent" class="glass-panel w-full max-w-2xl rounded-[2.5rem] bg-brand-navy/50 p-8 md:p-12 relative">
             <button onclick="closeModal()" class="absolute top-6 right-6 w-10 h-10 glass-btn rounded-xl flex items-center justify-center text-white bg-brand-navy border-white/20">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
@@ -367,80 +389,63 @@
         const projects = [
             {
                 id: 'auto',
-                title: 'Automotive Systems',
-                short: 'AGL & Embedded Flutter',
+                title: 'Automotive',
+                short: 'AGL Systems',
                 icon: 'fa-car-side',
                 color: 'bg-neo-blue',
-                details: `<h2 class="text-2xl font-black mb-4 uppercase">Automotive Embedded Systems</h2>
-                          <p class="mb-4 text-slate-300">Engineered high-fidelity digital instrument clusters for Automotive Grade Linux (AGL) using Embedded Flutter.</p>
-                          <ul class="space-y-2 text-sm text-slate-400">
-                            <li>• Architectural research on next-gen infotainment system fluidity.</li>
-                            <li>• Real-time vehicle CAN bus data visualization.</li>
-                          </ul>`
+                details: `<h2 class="text-3xl font-black mb-6 uppercase">Automotive Embedded Systems</h2>
+                          <p class="mb-6 text-slate-300 text-lg">Engineered high-fidelity digital instrument clusters for Automotive Grade Linux (AGL) using Embedded Flutter. Conducted architectural research on next-gen infotainment system fluidity and real-time vehicle CAN bus data visualization.</p>`
             },
             {
                 id: 'iubnest',
                 title: 'IUB NEST',
-                short: 'Campus Utility Ecosystem',
+                short: 'Campus Utility',
                 icon: 'fa-graduation-cap',
                 color: 'bg-neo-mint',
-                details: `<h2 class="text-2xl font-black mb-4 uppercase">IUB NEST | Product Lead</h2>
-                          <div class="status-pill inline-block mb-4 border-neo-mint text-neo-mint px-2 py-1 text-[10px] rounded-full uppercase border">JUNE 2025</div>
-                          <p class="mb-4 text-slate-300 font-bold">Directed the full-lifecycle development of a campus utility ecosystem.</p>
-                          <ul class="space-y-2 text-sm text-slate-400">
-                            <li>• <span class="text-white">Impact:</span> Scaled to 4,000+ users with 1,500+ daily active users.</li>
-                            <li>• <span class="text-white">Features:</span> Routine viewers, faculty directories, CGPA calculators, and course planning engine.</li>
+                details: `<h2 class="text-3xl font-black mb-6 uppercase">IUB NEST | Product Lead</h2>
+                          <div class="inline-block mb-6 border-2 border-neo-mint text-neo-mint px-4 py-1 text-xs rounded-full uppercase font-black">JUNE 2025</div>
+                          <p class="mb-6 text-slate-300 text-lg font-bold">Directed the full-lifecycle development of a campus utility ecosystem.</p>
+                          <ul class="space-y-4 text-slate-400">
+                            <li>• <span class="text-white font-black">Impact:</span> Scaled to 4,000+ users with 1,500+ daily active users.</li>
+                            <li>• <span class="text-white font-black">Features:</span> Integrated routine viewers, faculty directories, and course engines.</li>
                           </ul>`
             },
             {
                 id: 'kiosk',
-                title: 'Enterprise Kiosks',
-                short: 'Retail & Healthcare',
+                title: 'Kiosks',
+                short: 'Enterprise Solutions',
                 icon: 'fa-cash-register',
                 color: 'bg-neo-purple',
-                details: `<h2 class="text-2xl font-black mb-4 uppercase">Enterprise Kiosk Ecosystems</h2>
-                          <div class="space-y-4 text-sm">
-                            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-                                <h3 class="font-bold text-neo-purple uppercase mb-1">Autonomous Retail</h3>
-                                <p class="text-slate-400">Architected high-throughput Self-Checkout App with secure payment hooks.</p>
+                details: `<h2 class="text-3xl font-black mb-6 uppercase">Enterprise Kiosk Ecosystems</h2>
+                          <div class="grid md:grid-cols-2 gap-4 text-sm">
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+                                <h3 class="font-black text-neo-purple uppercase mb-2">Autonomous Retail</h3>
+                                <p class="text-slate-400">Self-Checkout with secure payment hooks and sync processing.</p>
                             </div>
-                            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-                                <h3 class="font-bold text-neo-purple uppercase mb-1">Hospitality & Healthcare</h3>
-                                <p class="text-slate-400">End-to-end Food Ordering Systems and automated appointment kiosks.</p>
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+                                <h3 class="font-black text-neo-purple uppercase mb-2">Healthcare eKYC</h3>
+                                <p class="text-slate-400">Facial recognition identity verification and automated OCR.</p>
                             </div>
                           </div>`
             },
             {
                 id: 'telemetry',
-                title: 'Drone Telemetry',
-                short: 'IoT & MAVLink Systems',
+                title: 'Telemetry',
+                short: 'UAV IoT Systems',
                 icon: 'fa-satellite',
                 color: 'bg-neo-pink',
-                details: `<h2 class="text-2xl font-black mb-4 uppercase">FalcryX Drone Telemetry | IoT Lead</h2>
-                          <div class="status-pill inline-block mb-4 border-neo-pink text-neo-pink px-2 py-1 text-[10px] rounded-full uppercase border">JAN 2026</div>
-                          <p class="mb-4 text-slate-300">Engineered a low-latency, event-driven telemetry architecture using MAVLink and FastAPI.</p>
-                          <ul class="space-y-2 text-sm text-slate-400">
-                            <li>• Real-time fail-safe monitoring for UAV operations.</li>
-                            <li>• Systems Engineering: Managed data persistence between MQTT publishers and databases.</li>
-                          </ul>`
+                details: `<h2 class="text-3xl font-black mb-6 uppercase">FalcryX Drone Telemetry | IoT Lead</h2>
+                          <div class="inline-block mb-6 border-2 border-neo-pink text-neo-pink px-4 py-1 text-xs rounded-full uppercase font-black">JAN 2026</div>
+                          <p class="mb-6 text-slate-300 text-lg">Low-latency telemetry architecture using MAVLink and FastAPI, featuring fail-safe monitoring for UAV operations.</p>`
             },
             {
                 id: 'volunteer',
-                title: 'Uni Management',
-                short: 'Verification & PWAs',
+                title: 'PWAs',
+                short: 'Management Systems',
                 icon: 'fa-id-card',
                 color: 'bg-neo-yellow',
-                details: `<h2 class="text-2xl font-black mb-4 uppercase">University Management Portals</h2>
-                          <div class="space-y-4 text-sm">
-                            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-                                <h3 class="font-bold text-neo-yellow uppercase mb-1">Volunteer Portal</h3>
-                                <p class="text-slate-400">Architected official PWA for Event Tracking. Transitioned from legacy Google Sheets to a scalable platform.</p>
-                            </div>
-                            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-                                <h3 class="font-bold text-neo-yellow uppercase mb-1">Verification Portal</h3>
-                                <p class="text-slate-400">Secure platform for fraud-proof certificate generation using QR codes for instant verification.</p>
-                            </div>
-                          </div>`
+                details: `<h2 class="text-3xl font-black mb-6 uppercase">University Portals</h2>
+                          <p class="mb-6 text-slate-300 text-lg">Architected the official PWA for Event Tracking and Verification. Built fraud-proof certificate generation using QR codes for instant verification.</p>`
             }
         ];
 
@@ -450,10 +455,10 @@
             const card = document.createElement('div');
             card.className = "flex-shrink-0 project-card aspect-square snap-center";
             card.innerHTML = `
-                <button onclick="openModal('${p.id}')" class="w-full h-full glass-btn ${p.color} rounded-[2rem] p-4 flex flex-col items-center justify-center text-center group">
-                    <i class="fa-solid ${p.icon} text-2xl mb-3 group-hover:scale-110 transition-transform text-black"></i>
-                    <h4 class="text-[10px] font-black uppercase text-black leading-tight">${p.title}</h4>
-                    <p class="text-[8px] font-bold text-black/60 uppercase mt-1 leading-tight">${p.short}</p>
+                <button onclick="openModal('${p.id}')" class="w-full h-full glass-btn ${p.color} rounded-[2rem] md:rounded-[3rem] p-6 flex flex-col items-center justify-center text-center group">
+                    <i class="fa-solid ${p.icon} text-3xl md:text-4xl mb-4 group-hover:scale-110 transition-transform text-black"></i>
+                    <h4 class="text-xs md:text-sm font-black uppercase text-black leading-tight">${p.title}</h4>
+                    <p class="text-[9px] md:text-[10px] font-bold text-black/60 uppercase mt-1 leading-tight tracking-tighter">${p.short}</p>
                 </button>
             `;
             sliderMount.appendChild(card);
